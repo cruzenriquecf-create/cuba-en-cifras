@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 type Observation = {
@@ -21,7 +21,9 @@ type Currency = {
 };
 
 export default function ReviewQueue() {
-  const supabase = createClient();
+  // Keep one browser client for the lifetime of this component.
+  // A new client on every render changes loadPending and retriggers the effect.
+  const supabase = useMemo(() => createClient(), []);
   const [items, setItems] = useState<Observation[]>([]);
   const [currencies, setCurrencies] = useState<Currency[]>([]);
   const [loading, setLoading] = useState(true);
