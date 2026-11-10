@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 
 type HistoryItem = {
@@ -22,7 +22,7 @@ type Currency = {
 };
 
 export default function ReviewHistory() {
-  const supabase = createClient();
+  // Keep one browser client for the lifetime of this component.\n  // Recreating it on every render retriggers the history-loading effect.\n  const supabase = useMemo(() => createClient(), []);
   const [items, setItems] = useState<HistoryItem[]>([]);
   const [currencies, setCurrencies] = useState<Currency[]>([]);
   const [loading, setLoading] = useState(true);
