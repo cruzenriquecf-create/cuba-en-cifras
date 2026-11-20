@@ -1,9 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  // Keep the Cloudflare/OpenNext runtime on the stable Next.js rendering path.
+  // The experimental cache-components + partial-prefetching combination was
+  // enabled during troubleshooting and is not required by this application.
   turbopack: {
     rules: {
       "*.css": {
