@@ -1,9 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  cacheComponents: true,
-  partialPrefetching: true,
+  // Cloudflare Workers/OpenNext: Cache Components are temporarily disabled
+  // because Next.js 16 currently has a known Worker-hang issue with this mode.
   turbopack: {
     rules: {
       "*.css": {
